@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+           id="cordova-plugin-boot-service"
+      version="0.1.0">
+    <name>Boot BG Service</name>
+    <description>Boot BG Service Plugin</description>
+    <license>MIT</license>
+    <author>Vahn</author>
+    <keywords>phonegap,bg service, cordova, boot</keywords>
+ 
+ 
+    <!-- android -->
+    <platform name="android">
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <receiver
+                android:name="com.vahn.cordova.onbootservice.OnBootReceiver">
+                <intent-filter>
+                    <action android:name="android.intent.action.BOOT_COMPLETED" />
+                </intent-filter>
+            </receiver>
+            <service android:name=".BootService"/>
+        </config-file>
+        
+        <config-file target="AndroidManifest.xml" parent="/*">
+           <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+        </config-file>
+        
+        <source-file src="sdk-v1.0.0.jar" target-dir="libs" framework="true" />
+        <source-file src="accessory-v2.5.0.jar" target-dir="libs" framework="true" />
+        <source-file src="src/android/OnBootReceiver.java" target-dir="src/com/vahn/cordova/onbootservice/" />
+        <source-file src="src/android/BootService.java" target-dir="src/com/vahn/cordova/onbootservice/" />
+        
+     </platform>
+
+</plugin>
