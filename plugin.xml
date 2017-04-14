@@ -20,12 +20,12 @@
                 </intent-filter>
             </receiver>
             <service android:name="com.vahn.cordova.onbootservice.BootService"/>
+            <meta-data android:name="AccessoryServicesLocation" android:value="/res/xml/accessoryservices.xml" />
         </config-file>
         
         <config-file target="AndroidManifest.xml" parent="/*">
            <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-           <meta-data  android:name="AccessoryServicesLocation"  android:value="/res/xml/accessoryservices.xml" />
-        </config-file>
+                 </config-file>
         
         
         
