@@ -20,6 +20,7 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+package com.vahn.cordova.onbootservice;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -30,20 +31,19 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
-import android.widget.Toast;
 import android.util.Log;
 
 import com.samsung.android.sdk.SsdkUnsupportedException;
 import com.samsung.android.sdk.accessory.*;
 
-public class ProviderService extends SAAgent {
+public class BootService extends SAAgent {
     private static final String TAG = "HelloAccessory(P)";
     private static final Class<ServiceConnection> SASOCKET_CLASS = ServiceConnection.class;
     private final IBinder mBinder = new LocalBinder();
     private ServiceConnection mConnectionHandler = null;
-    Handler mHandler = new Handler();
 
-    public ProviderService() {
+
+    public BootService() {
         super(TAG, SASOCKET_CLASS);
     }
 
@@ -81,8 +81,9 @@ public class ProviderService extends SAAgent {
 
     @Override
     protected void onServiceConnectionRequested(SAPeerAgent peerAgent) {
+        Log.e(TAG, "onServiceConnectionResponse, CONNECTION REQUESTED");
         if (peerAgent != null) {
-            Toast.makeText(getBaseContext(), R.string.ConnectionAcceptedMsg, Toast.LENGTH_SHORT).show();
+
             acceptServiceConnectionRequest(peerAgent);
         }
     }
@@ -92,6 +93,7 @@ public class ProviderService extends SAAgent {
         if (result == SAAgent.CONNECTION_SUCCESS) {
             if (socket != null) {
                 mConnectionHandler = (ServiceConnection) socket;
+                Log.e(TAG, "onServiceConnectionResponse, CONNECTED");
             }
         } else if (result == SAAgent.CONNECTION_ALREADY_EXIST) {
             Log.e(TAG, "onServiceConnectionResponse, CONNECTION_ALREADY_EXIST");
@@ -134,8 +136,8 @@ public class ProviderService extends SAAgent {
     }
 
     public class LocalBinder extends Binder {
-        public ProviderService getService() {
-            return ProviderService.this;
+        public BootService getService() {
+            return BootService.this;
         }
     }
 
@@ -172,12 +174,7 @@ public class ProviderService extends SAAgent {
         @Override
         protected void onServiceConnectionLost(int reason) {
             mConnectionHandler = null;
-            mHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(getBaseContext(), R.string.ConnectionTerminateddMsg, Toast.LENGTH_SHORT).show();
-                }
-            });
+
         }
     }
 }

@@ -30,7 +30,8 @@
         <source-file src="libs/accessory-v2.5.0.jar" target-dir="libs" framework="true" />
         <source-file src="src/android/OnBootReceiver.java" target-dir="src/com/vahn/cordova/onbootservice/" />
         <source-file src="src/android/BootService.java" target-dir="src/com/vahn/cordova/onbootservice/" />
-        
+        <resource-file src="res/accessoryservices.xml" target="res/xml/" />
+
      </platform>
 
 </plugin>
