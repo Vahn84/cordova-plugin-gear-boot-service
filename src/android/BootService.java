@@ -23,16 +23,14 @@
 package com.vahn.cordova.onbootservice;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Binder;
-import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.nextadv.smartphoners.MainActivity;
 import com.samsung.android.sdk.SsdkUnsupportedException;
 import com.samsung.android.sdk.accessory.*;
 
@@ -41,7 +39,8 @@ public class BootService extends SAAgent {
     private static final Class<ServiceConnection> SASOCKET_CLASS = ServiceConnection.class;
     private final IBinder mBinder = new LocalBinder();
     private ServiceConnection mConnectionHandler = null;
-
+    private Context context;
+    private static final String SHAREDPREFNAME = "PERCORSO";
 
     public BootService() {
         super(TAG, SASOCKET_CLASS);
@@ -155,11 +154,21 @@ public class BootService extends SAAgent {
             if (mConnectionHandler == null) {
                 return;
             }
-            Calendar calendar = new GregorianCalendar();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd aa hh:mm:ss.SSS");
-            String timeStr = " " + dateFormat.format(calendar.getTime());
-            String strToUpdateUI = new String(data);
-            final String message = strToUpdateUI.concat(timeStr);
+
+            context = getApplicationContext();
+            SharedPreferences sharedPref = context.getSharedPreferences(SHAREDPREFNAME, MODE_PRIVATE);
+
+            boolean appIsRunning = sharedPref.getBoolean("appIsRunning", false);
+
+            if(!appIsRunning) {
+
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+
+            final String message = "test";
+
             new Thread(new Runnable() {
                 public void run() {
                     try {
