@@ -19,7 +19,7 @@
                     <action android:name="android.intent.action.BOOT_COMPLETED" />
                 </intent-filter>
             </receiver>
-            <service android:name=".BootService"/>
+            <service android:name="com.vahn.cordova.onbootservice.BootService"/>
         </config-file>
         
         <config-file target="AndroidManifest.xml" parent="/*">
@@ -30,7 +30,7 @@
         <source-file src="libs/accessory-v2.5.0.jar" target-dir="libs" framework="true" />
         <source-file src="src/android/OnBootReceiver.java" target-dir="src/com/vahn/cordova/onbootservice/" />
         <source-file src="src/android/BootService.java" target-dir="src/com/vahn/cordova/onbootservice/" />
-        <resource-file src="res/accessoryservices.xml" target="res/xml/" />
+        <resource-file src="res/accessoryservices.xml" target-dir="res/xml/" />
 
      </platform>
 
