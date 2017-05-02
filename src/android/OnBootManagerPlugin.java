@@ -17,7 +17,7 @@ import org.json.JSONObject;
  * Created by vahn on 02/05/2017.
  */
 
-public class AppManager extends CordovaPlugin {
+public class OnBootManagerPlugin extends CordovaPlugin {
 
     PluginResult result;
     Context context;
