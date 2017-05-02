@@ -16,13 +16,7 @@
  
     <!-- android -->
     <platform name="android">
-        
-        <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="OnBootManagerPlugin">
-                <param name="android-package" value="com.vahn.cordova.onbootservice.OnBootManagerPlugin"/>
-            </feature>
-            
-        </config-file>
+
 
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <receiver
