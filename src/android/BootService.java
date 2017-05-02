@@ -155,14 +155,23 @@ public class BootService extends SAAgent {
             if (mConnectionHandler == null) {
                 return;
             }
-
+            
+            /*
+             Questa stringa 'action' andrà a prendersi il tipo di richiesta dalla variabile 'data'
+             Attualmente viene settata di default come start e stop dei percorsi
+            */
+            String action = "start_stop";
+            
             context = getApplicationContext();
             SharedPreferences sharedPref = context.getSharedPreferences(SHAREDPREFNAME, MODE_PRIVATE);
-
+            SharedPreferences.Editor editor = sharedPref.edit();
             boolean appIsRunning = sharedPref.getBoolean("appIsRunning", false);
-
+            
+            if(action.equals("start_stop")){
+            
             if(!appIsRunning) {
-
+                editor.putBoolean("startedFromSW", true);
+                editor.commit();
                 Intent intent = new Intent(context, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
@@ -170,6 +179,8 @@ public class BootService extends SAAgent {
                 Intent intent = new Intent();
                 intent.setAction(filter);
                 context.sendBroadcast(intent);
+            }
+                
             }
 
             final String message = sharedPref.getString("routeKms","0");
