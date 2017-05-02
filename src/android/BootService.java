@@ -41,6 +41,7 @@ public class BootService extends SAAgent {
     private ServiceConnection mConnectionHandler = null;
     private Context context;
     private static final String SHAREDPREFNAME = "PERCORSO";
+    String filter = "com.vahn.cordova.onbootservice.BOOT_SERVICE_ACTION";
 
     public BootService() {
         super(TAG, SASOCKET_CLASS);
@@ -165,9 +166,13 @@ public class BootService extends SAAgent {
                 Intent intent = new Intent(context, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
+            } else {
+                Intent intent = new Intent();
+                intent.setAction(filter);
+                context.sendBroadcast(intent);
             }
 
-            final String message = "test";
+            final String message = sharedPref.getString("routeKms","0");
 
             new Thread(new Runnable() {
                 public void run() {

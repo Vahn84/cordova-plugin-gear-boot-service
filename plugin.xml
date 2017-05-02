@@ -8,10 +8,22 @@
     <license>MIT</license>
     <author>Vahn</author>
     <keywords>phonegap,bg service, cordova, boot</keywords>
- 
+    
+    
+    <js-module src="www/gear_service.js" name="OnBootManagerPlugin">
+        <clobbers target="window.gear_service" />
+    </js-module>
  
     <!-- android -->
     <platform name="android">
+        
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="OnBootManagerPlugin">
+                <param name="android-package" value="com.vahn.cordova.onbootservice.OnBootManagerPlugin"/>
+            </feature>
+            
+        </config-file>
+
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <receiver
                 android:name="com.vahn.cordova.onbootservice.OnBootReceiver">
@@ -31,6 +43,7 @@
         
         <source-file src="libs/sdk-v1.0.0.jar" target-dir="libs" framework="true" />
         <source-file src="libs/accessory-v2.5.0.jar" target-dir="libs" framework="true" />
+        <source-file src="src/android/OnBootManagerPlugin.java" target-dir="src/com/vahn/cordova/onbootservice/" />
         <source-file src="src/android/OnBootReceiver.java" target-dir="src/com/vahn/cordova/onbootservice/" />
         <source-file src="src/android/BootService.java" target-dir="src/com/vahn/cordova/onbootservice/" />
         <resource-file src="res/accessoryservices.xml" target="res/xml/" />
