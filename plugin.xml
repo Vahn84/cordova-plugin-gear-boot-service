@@ -31,7 +31,7 @@
                     <action android:name="android.intent.action.BOOT_COMPLETED" />
                 </intent-filter>
             </receiver>
-            <service android:name="com.vahn.cordova.onbootservice.BootService"/>
+            <service android:name="com.vahn.cordova.onbootservice.BootService" android:isolatedProcess="true"/>
             <meta-data android:name="AccessoryServicesLocation" android:value="/res/xml/accessoryservices.xml" />
         </config-file>
         
