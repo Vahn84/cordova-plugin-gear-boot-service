@@ -31,12 +31,26 @@
                     <action android:name="android.intent.action.BOOT_COMPLETED" />
                 </intent-filter>
             </receiver>
-            <service android:externalService="true" android:exported="true" android:isolatedProcess="true" android:name="com.vahn.cordova.onbootservice.BootService" />
+            <receiver android:name="com.samsung.android.sdk.accessory.ServiceConnectionIndicationBroadcastReceiver">
+                <intent-filter>
+                    <action android:name="com.samsung.accessory.action.SERVICE_CONNECTION_REQUESTED" />
+                </intent-filter>
+            </receiver>
+            <receiver android:name="com.samsung.android.sdk.accessory.RegisterUponInstallReceiver">
+                <intent-filter>
+                    <action android:name="com.samsung.accessory.action.REGISTER_AGENT" />
+                </intent-filter>
+            </receiver>
+            
+            <service android:isolatedProcess="true" android:name="com.vahn.cordova.onbootservice.BootService" />
             <meta-data android:name="AccessoryServicesLocation" android:value="/res/xml/accessoryservices.xml" />
         </config-file>
         
         <config-file target="AndroidManifest.xml" parent="/*">
            <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+           <uses-permission android:name="android.permission.BLUETOOTH" />
+           <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+           <uses-permission android:name="com.samsung.accessory.permission.ACCESSORY_FRAMEWORK" />
                  </config-file>
         
         
