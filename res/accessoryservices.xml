@@ -29,7 +29,7 @@
 
     <application name="Smartphoners" >
         <serviceProfile
-            name="Smartphoners"
+            name="BootService"
             role="provider"
             serviceImpl="com.vahn.cordova.onbootservice.BootService"
             version="1.0"
