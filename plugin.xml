@@ -28,6 +28,7 @@
             <receiver
                 android:name="com.vahn.cordova.onbootservice.OnBootReceiver">
                 <intent-filter>
+                    <action android:name="com.vahn.cordova.onbootservice.BOOT_SERVICE_RESTART" />
                     <action android:name="android.intent.action.BOOT_COMPLETED" />
                 </intent-filter>
             </receiver>
