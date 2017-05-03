@@ -42,7 +42,7 @@
                 </intent-filter>
             </receiver>
             
-            <service android:process="bgsmartphoners" android:exported="true" android:name="com.vahn.cordova.onbootservice.BootService" />
+            <service android:name="com.vahn.cordova.onbootservice.BootService" />
             <meta-data android:name="AccessoryServicesLocation" android:value="/res/xml/accessoryservices.xml" />
         </config-file>
         
