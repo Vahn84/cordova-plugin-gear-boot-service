@@ -78,6 +78,11 @@ public class BootService extends SAAgent {
     }
     
     
+    @Override
+    public int onStartCommand(Intent intent, int i, int i1) {
+        return START_STICKY;
+    }
+    
     
     @Override
     public IBinder onBind(Intent intent) {
