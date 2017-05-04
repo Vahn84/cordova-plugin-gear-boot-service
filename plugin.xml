@@ -32,16 +32,7 @@
                     <action android:name="android.intent.action.BOOT_COMPLETED" />
                 </intent-filter>
             </receiver>
-            <receiver android:name="com.samsung.android.sdk.accessory.ServiceConnectionIndicationBroadcastReceiver">
-                <intent-filter>
-                    <action android:name="com.samsung.accessory.action.SERVICE_CONNECTION_REQUESTED" />
-                </intent-filter>
-            </receiver>
-            <receiver android:name="com.samsung.android.sdk.accessory.RegisterUponInstallReceiver">
-                <intent-filter>
-                    <action android:name="com.samsung.accessory.action.REGISTER_AGENT" />
-                </intent-filter>
-            </receiver>
+
             
             <service android:name="com.vahn.cordova.onbootservice.BootService" />
             <meta-data android:name="AccessoryServicesLocation" android:value="/res/xml/accessoryservices.xml" />
